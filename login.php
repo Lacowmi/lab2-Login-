@@ -1,11 +1,12 @@
 <?php
+session_start();
 if (!empty($_POST)) {
     require __DIR__ . '/auth.php';
 
     $login = $_POST['login'] ?? '';
     $password = $_POST['password'] ?? '';
     
-    if (checkAuth($login, $password)) {
+    if (checkAuth($login, $password) || $_SESSION['login'] || $_SESSION['password']) {
         setcookie('login', $login, 0, '/');
         setcookie('password', $password, 0, '/');
         header('Location: /welcome.php');
