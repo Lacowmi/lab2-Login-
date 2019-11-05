@@ -14,28 +14,16 @@
 	  require __DIR__ . '/auth.php';
     
     
-    viewLang();
+    viewLang($welcome);
     
-    function viewLang()
+    function viewLang($welcome)
     {
       if($_POST['language'] != ''){
         $_SESSION['user']['lang'] = $_POST['language'];
-      }
-      switch ($_SESSION['user']['lang']) {
-        case 'ru': 
-          echo $welcome['ru']. ",". $_SESSION['user']['login']. "!";
-          break;
-        case 'en': 
-          echo $welcome['en']. ",". $_SESSION['user']['login']. "!";
-          break;
-         case 'ua': 
-          echo $welcome['ua']. ",". $_SESSION['user']['login']. "!";
-          break;
-         case 'it': 
-          echo $welcome['it']. ",". $_SESSION['user']['login']. "!";
-          break; 
-        default:
-          addAllLangToDropDown();
+        $lang = $_SESSION['user']['lang'];
+        echo $welcome[$lang]. ",". $_SESSION['user']['login'];
+      } else {
+        addAllLangToDropDown();
       }
     }
 
