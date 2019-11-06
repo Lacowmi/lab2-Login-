@@ -1,8 +1,3 @@
-<html>
-<head>
-    <title>Приветствие</title>
-</head>
-<body>
 	<?php
     session_start();
     $welcome = [
@@ -23,26 +18,8 @@
         $lang = $_SESSION['user']['lang'];
         echo $welcome[$lang]. ",". $_SESSION['user']['login'];
       } else {
-        addAllLangToDropDown();
+        $welcomeLang = require __DIR__ . '/langDrop.php';
+        #$welcomeLang;
       }
-    }
-
-    function addAllLangToDropDown()
-    {  
-      echo "<form method='POST' action='welcome.php'>";
-      echo "<select name='language'><option>Выбор языка</option>";
-
-      $users = require __DIR__ . '/users.php';
-      foreach ($users as $user)
-      {
-        if($user['lang'] != '')
-          echo "<option value='" . $user['lang'] . "'>" . $user['lang'] . "</option>";
-      }
-
-      echo "</select> <br><br>";
-      echo "<div> <button type='submit'>Выбрать</button> </div>";
-      echo "</form>";
     }
 	?>
-</body>
-</html>
